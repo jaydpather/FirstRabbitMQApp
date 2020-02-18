@@ -2,7 +2,8 @@
 node_modules/
 
 fable/.ionide/
+fable/server/.ionide/
 
-fable/server/src/UI/obj/
-fable/server/src/UI/bin/
+fable/server/src/Main/obj/
+fable/server/src/Main/bin/
 fable/server/public/

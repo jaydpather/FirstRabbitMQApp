@@ -1,5 +1,5 @@
 {
-  "name": "chessreplay",
+  "name": "FirstRabbitMQApp-fable-server",
   "version": "1.0.0",
   "description": "Install Paket: https://fsprojects.github.io/Paket/get-started.html Download packages: dotnet paket install",
   "scripts": {

@@ -2,10 +2,10 @@ var path = require("path");
  
 module.exports = {
     mode: "development",
-    entry: "C:\\Users\\jaydp\\Documents\\Github\\Fable\\ChessReplay\\src\\UI\\App.fsproj",
+    entry: "C:\\Users\\jaydp\\Documents\\Github\\RabbitMQ\\FirstRabbitMQApp\\fable\\server\\src\\Main\\Main.fsproj",
     output: {
-        path: "C:\\Users\\jaydp\\Documents\\Github\\Fable\\ChessReplay\\public",
-        filename: "bundle.js",
+        path: "C:\\Users\\jaydp\\Documents\\Github\\RabbitMQ\\FirstRabbitMQApp\\fable\\server\\public",
+        filename: "server-fable.js",
     },
     devServer: {
         contentBase: "public",
