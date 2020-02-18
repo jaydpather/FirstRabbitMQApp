@@ -1,5 +1,6 @@
 .next/
 node_modules/
+node/server/fableImports
 
 fable/.ionide/
 fable/server/.ionide/

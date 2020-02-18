@@ -4,8 +4,10 @@ module.exports = {
     mode: "development",
     entry: "C:\\Users\\jaydp\\Documents\\Github\\RabbitMQ\\FirstRabbitMQApp\\fable\\server\\src\\Main\\Main.fsproj",
     output: {
-        path: "C:\\Users\\jaydp\\Documents\\Github\\RabbitMQ\\FirstRabbitMQApp\\fable\\server\\public",
-        filename: "server-fable.js",
+        path: "C:\\Users\\jaydp\\Documents\\Github\\RabbitMQ\\FirstRabbitMQApp\\node\\server\\fableImports",
+        filename: "serverFable.js",
+        library:"serverFable",
+        libraryTarget:"commonjs"
     },
     devServer: {
         contentBase: "public",
