@@ -1,2 +1,8 @@
 .next/
 node_modules/
+
+fable/.ionide/
+
+fable/server/src/UI/obj/
+fable/server/src/UI/bin/
+fable/server/public/
