@@ -16,25 +16,13 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
 
-    let handleFunc = (req2, res2, parsedUrl2) => () => { 
-        console.log("handleFunc");
-        handle(req2, res2, parsedUrl2);
-    }
-
     if(!pathname.endsWith(".js") && !pathname.includes("_next"))
     {
         console.log("RECEIVED REQUEST FOR: " + pathname);
         var response = await callRPC();
         console.log("received response: " + response);
-        //initMessageLog(handleFunc(req, res, parsedUrl));
-        
-        //var response = waitForRPC("request", handleFunc).catch(err => console.error(err));
-        //console.log("received response " + response)
-        //console.log("returned from initMessageLog()");
     }
 
-    //res.write
-    
     handle(req, res, parsedUrl)
     
   }).listen(port, err => {
@@ -72,7 +60,6 @@ function initMessageLog(resolve){
                         console.log(' [.] Got %s', msg.content.toString());
                         response = msg.content.toString();
                         resolve(response);
-                        //parentPort.postMessage(response);
                     }
                 }, {
                     noAck: true
@@ -95,23 +82,6 @@ function generateUuid() {
         Math.random().toString();
 }
 
-async function waitForRPC(request){
-    var response = await callRPC(request);
-    //var response = Promise.all([responsePromise]);
-
-    //var nextResponse = Promise.all([response]);
-    return response;
-}
-
 function callRPC(request) {
     return new Promise(resolve => initMessageLog(resolve));
-    // return new Promise((resolve, reject) => {
-    //     const worker = new Worker('./server/rpcWrapper.js', { request });
-    //     worker.once('message', resolve);
-    //     worker.on('error', reject);
-    //     worker.on('exit', (code) => {
-    //     if (code !== 0)
-    //         reject(new Error(`Worker stopped with exit code ${code}`));
-    //     })
-    // })
 }
