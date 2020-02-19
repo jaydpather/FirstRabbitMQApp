@@ -17,7 +17,7 @@ type RPCInfo = {
     props : IBasicProperties;
 }
 
-let onMessageReceived (respQueue:BlockingCollection<string>) correlationId model (ea:BasicDeliverEventArgs) = 
+let onMessageReceived (respQueue:BlockingCollection<string>) correlationId (ea:BasicDeliverEventArgs) = 
     let response = Encoding.UTF8.GetString(ea.Body)
     if(ea.BasicProperties.CorrelationId = correlationId) then
         respQueue.Add(response)
