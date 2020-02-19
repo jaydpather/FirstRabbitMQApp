@@ -1,9 +1,16 @@
-import Layout from '../components/MyLayout';
+import React, { Component } from 'react'
 
-export default function Index(){
-    return (
-        <Layout>
-            <p>Hello Rabbit MQ</p>
-        </Layout>
-    );
+export default class extends Component {
+  static getInitialProps ({ query: { data } }) {
+    return { data: data }
+  }
+
+  render () {
+    console.log("page recevied: " + this.props.data);
+    return <div>
+      <p>
+        data loaded: {this.props.data}
+      </p>
+    </div>
+  }
 }

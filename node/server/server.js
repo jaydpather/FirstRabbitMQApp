@@ -15,15 +15,16 @@ app.prepare().then(() => {
   createServer(async (req, res) => {
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
-
     if(!pathname.endsWith(".js") && !pathname.includes("_next"))
     {
         console.log("RECEIVED REQUEST FOR: " + pathname);
         var response = await callRPC();
         console.log("received response: " + response);
-    }
 
-    handle(req, res, parsedUrl)
+        app.render(req, res, pathname, {data: response});
+    }
+    else
+        handle(req, res, parsedUrl)
     
   }).listen(port, err => {
     if (err) throw err
@@ -53,11 +54,8 @@ function initMessageLog(resolve){
                 var correlationId = generateUuid();
                 var num = 3
   
-                console.log(' [x] Requesting fib(%d)', num);
-  
                 channel.consume(q.queue, function(msg) {
                     if (msg.properties.correlationId === correlationId) {
-                        console.log(' [.] Got %s', msg.content.toString());
                         response = msg.content.toString();
                         resolve(response);
                     }
