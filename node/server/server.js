@@ -33,6 +33,7 @@ app.prepare().then(() => {
   })
 })
 
+//todo: look up RabbitMQ prod guidelines. (this code is copied from the tutorial, which is not the best practice for prod)
 function initMessageLog(resolve){
     var response = null;
     amqp.connect('amqp://localhost', function(error0, connection) {    

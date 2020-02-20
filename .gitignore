@@ -1,4 +1,5 @@
 .next/
+
 node_modules/
 node/server/fableImports
 
@@ -8,3 +9,6 @@ fable/server/.ionide/
 fable/server/src/Main/obj/
 fable/server/src/Main/bin/
 fable/server/public/
+
+microservices/RandomNumberMicroservice/bin/
+microservices/RandomNumberMicroservice/obj/
