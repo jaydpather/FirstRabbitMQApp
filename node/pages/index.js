@@ -13,6 +13,7 @@ export default class extends Component {
       url: 'http://localhost:3000/data/getRandomNumber',
       responseType: 'json'
     }).then(function(response){
+        //todo: data loaded twice when using SSR
         self.setState(response.data);
       })
       .catch(function(error){
