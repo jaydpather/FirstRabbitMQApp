@@ -52,7 +52,7 @@ function initMessageLog(resolve){
                 if (error2) {
                     throw error2;
                 }
-                console.log("queue asserted");
+                console.log(`queue asserted: ${q.queue}`);
                 var correlationId = generateUuid();
                 var num = 3
   
