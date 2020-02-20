@@ -15,16 +15,17 @@ app.prepare().then(() => {
   createServer(async (req, res) => {
     const parsedUrl = parse(req.url, true)
     const { pathname, query } = parsedUrl
-    if(!pathname.endsWith(".js") && !pathname.includes("_next"))
-    {
+    if(pathname.startsWith("/data")){
         console.log("RECEIVED REQUEST FOR: " + pathname);
         var response = await callRPC();
         console.log("received response: " + response);
 
-        app.render(req, res, pathname, {data: response});
+        res.write(response);
+        res.end();
     }
-    else
+    else{
         handle(req, res, parsedUrl)
+    }
     
   }).listen(port, err => {
     if (err) throw err
