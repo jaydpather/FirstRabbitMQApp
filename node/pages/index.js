@@ -3,29 +3,20 @@ import Layout from '../components/MyLayout';
 const axios = require('axios');
 
 export default class extends Component {
-  constructor(props){
-    super(props);
-
-    var self = this;
-    self.state = { data : "loading..."}
-    axios({
-      method: 'get',
-      url: 'http://localhost:3000/data/getRandomNumber',
-      responseType: 'json'
-    }).then(function(response){
-        //todo: data loaded twice when using SSR
-        self.setState(response.data);
-      })
-      .catch(function(error){
-        console.log("error"); //todo: display error message to user
-      });
+  static async getInitialProps(ctx) {
+    //todo: handle error. (what if microservice fails to respond?)
+    //todo: test case of real URL, not localhost.
+    //  * when it runs on server, does it get a 404?
+    //    * if not, does it go to the network instead of truly loading from localhost?
+    let response = await axios.get('http://localhost:3000/data/getRandomNumber');
+    return response.data;
   }
 
   render () {
     return (
       <Layout>
         <p>
-          data loaded: {this.state.data}
+          data loaded: {this.props.data}
         </p>
       </Layout>
     )
