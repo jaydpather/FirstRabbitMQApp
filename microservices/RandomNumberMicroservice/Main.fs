@@ -7,6 +7,11 @@ open System.Text
 open RabbitMQ.Client
 open MongoDB.Driver
 open MongoDB.Bson
+open Microsoft.FSharp.Reflection
+
+type RandomNumber = {
+    Value: int;
+}
 
 let startMsgQueueListener () = 
     let factory = ConnectionFactory()
@@ -34,13 +39,24 @@ let startMsgQueueListener () =
         printfn "received %s" message
         printfn "publishing: %s" responseString
 
+let convertToDictionary (record) =
+    seq {
+        //todo: load test to see how slow Reflection is
+        //  * cache FSharpType.GetRecordFields and check how fast it is
+        //  * compare to hardcoded conversion to dictionary
+        for prop in FSharpType.GetRecordFields(record.GetType()) -> 
+        prop.Name, prop.GetValue(record)
+    } |> dict
+
 let writeToMongo () = 
     let client = MongoClient()
     let database = client.GetDatabase("FirstRabbitMQApp")
     let collection = database.GetCollection<BsonDocument>("RandomNumbers");
-    let values = Dictionary<string, obj>()
-    values.["Value"] <- 123
-    let document = BsonDocument(values)
+    let record = { Value = 456 }
+    let document = 
+        record 
+        |> convertToDictionary 
+        |> BsonDocument
 
     collection.InsertOne(document) 
         |> ignore
