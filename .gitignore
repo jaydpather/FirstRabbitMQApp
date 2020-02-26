@@ -12,3 +12,4 @@ fable/server/public/
 
 microservices/RandomNumberMicroservice/bin/
 microservices/RandomNumberMicroservice/obj/
+microservices/RandomNumberMicroservice/.ionide/symbolCache.db
