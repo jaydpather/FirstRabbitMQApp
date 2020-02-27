@@ -13,3 +13,7 @@ fable/server/public/
 microservices/RandomNumberMicroservice/bin/
 microservices/RandomNumberMicroservice/obj/
 microservices/RandomNumberMicroservice/.ionide/symbolCache.db
+
+backend/.ionide/
+backend/bin/
+backend/obj/
