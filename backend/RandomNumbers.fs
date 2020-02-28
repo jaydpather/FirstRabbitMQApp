@@ -26,7 +26,7 @@ let onMessageReceived (respQueue:BlockingCollection<string>) correlationId (ea:B
         _response <- response
 
 
-let createClient = 
+let createClient () = 
     let factory = ConnectionFactory()
     factory.HostName <- "localhost" //todo: does F# have object initializer?
     let respQueue = new BlockingCollection<string>()
@@ -57,7 +57,7 @@ let createClient =
 
 let insertOne (httpContext:HttpContext) =
     _response <- ""
-    let rpcInfo = createClient
+    let rpcInfo = createClient ()
     while(_response = "") do
         System.Threading.Thread.Sleep(1)
 
