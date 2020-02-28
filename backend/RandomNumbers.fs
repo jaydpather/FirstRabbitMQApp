@@ -6,6 +6,7 @@ open RabbitMQ.Client.Events
 open System.Collections.Concurrent
 open System.Text
 open System
+open System.Collections.Generic
 
 
 type RPCInfo = {
@@ -55,5 +56,6 @@ let insertOne (httpContext:HttpContext) =
     let rpcInfo = createClient ()
     
     let responseString = rpcInfo.respQueue.Take()
+    httpContext.Response.Headers.["Access-Control-Allow-Origin"] <- Microsoft.Extensions.Primitives.StringValues("*")
     httpContext.Response.WriteAsync(responseString)
     

@@ -8,15 +8,19 @@ export default class extends Component {
     //todo: test case of real URL, not localhost.
     //  * when it runs on server, does it get a 404?
     //    * if not, does it go to the network instead of truly loading from localhost?
-    let response = await axios.get('http://localhost:3000/data/getRandomNumber');
+
+    console.log("getInitialProps")
+    let response = await axios.get('http://localhost:5000/data/RandomNumbers/InsertOne');
+
     return response.data;
   }
 
   render () {
+    console.log("rendering") //todo: why do we see this log message on both server and console when doing SSR?
     return (
       <Layout>
         <p>
-          data loaded: {this.props.data}
+          data loaded: {this.props.Value}
         </p>
       </Layout>
     )

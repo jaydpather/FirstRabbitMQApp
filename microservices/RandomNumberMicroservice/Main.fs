@@ -56,7 +56,7 @@ let startMsgQueueListener () =
         let recordToWrite = { Value = random.Next() }
         writeToMongo recordToWrite
 
-        let responseString = recordToWrite.ToString() //"{\"data\":" + responseValue.ToString() + "}"
+        let responseString = recordToWrite.ToJson() //"{\"data\":" + responseValue.ToString() + "}"
         let responseBytes = Encoding.UTF8.GetBytes(responseString)
         let addr = PublicationAddress(exchangeName = "", exchangeType = ExchangeType.Direct, routingKey = props.ReplyTo)
         channel.BasicPublish(addr = addr, basicProperties = replyProps, body = responseBytes)
