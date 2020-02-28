@@ -57,10 +57,10 @@ let createClient () =
 
 //todo: look up RabbitMQ prod guidelines. (this code is based on the C# tutorial, which is not the best practice for prod)
 let insertOne (httpContext:HttpContext) =
-    _response <- ""
+    _response <- "" //todo: make sure this is a different object id for each request
     let rpcInfo = createClient ()
     while(_response = "") do
-        System.Threading.Thread.Sleep(1)
+        System.Threading.Thread.Sleep(1) //todo: how can we do this without a manual call to Thread.Sleep?
 
     httpContext.Response.WriteAsync(_response)
 
