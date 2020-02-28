@@ -18,7 +18,10 @@ let startMsgQueueListener () =
     factory.HostName <- "localhost"
     use connection = factory.CreateConnection()
     use channel = connection.CreateModel()
-    let queueResult = channel.QueueDeclare(queue = "rpc_queue", durable = true, exclusive = false, autoDelete = false, arguments = null)
+    //todo: if you use durable=true, there seem to always be leftover requests that get processed when you start the microservice. (even if you haven't made any requests yet)
+    //  * you will have to investigate this issue if you need a durable queue
+    //  * leftover requests exist even after going into the RabbitMQ management console and purging the queue or deleting the queue!
+    let queueResult = channel.QueueDeclare(queue = "rpc_queue", durable = false, exclusive = false, autoDelete = false, arguments = null)
     let consumer = QueueingBasicConsumer(channel)
     
     channel.BasicConsume(queue = "rpc_queue", autoAck = false, consumer = consumer) |> ignore

@@ -55,6 +55,7 @@ let createClient () =
     }
     rpcInfo
 
+//todo: look up RabbitMQ prod guidelines. (this code is based on the C# tutorial, which is not the best practice for prod)
 let insertOne (httpContext:HttpContext) =
     _response <- ""
     let rpcInfo = createClient ()
