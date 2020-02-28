@@ -16,15 +16,10 @@ type RPCInfo = {
     props : IBasicProperties;
 }
 
-let mutable _response = ""
-
 let onMessageReceived (respQueue:BlockingCollection<string>) correlationId (ea:BasicDeliverEventArgs) = 
     let response = Encoding.UTF8.GetString(ea.Body)
     if(ea.BasicProperties.CorrelationId = correlationId) then
-        //respQueue.Add(response)
-        //httpContext.Response.WriteAsync(response) |> ignore
-        _response <- response
-
+        respQueue.Add(response)
 
 let createClient () = 
     let factory = ConnectionFactory()
@@ -57,10 +52,8 @@ let createClient () =
 
 //todo: look up RabbitMQ prod guidelines. (this code is based on the C# tutorial, which is not the best practice for prod)
 let insertOne (httpContext:HttpContext) =
-    _response <- "" //todo: make sure this is a different object id for each request
     let rpcInfo = createClient ()
-    while(_response = "") do
-        System.Threading.Thread.Sleep(1) //todo: how can we do this without a manual call to Thread.Sleep?
-
-    httpContext.Response.WriteAsync(_response)
-
+    
+    let responseString = rpcInfo.respQueue.Take()
+    httpContext.Response.WriteAsync(responseString)
+    
