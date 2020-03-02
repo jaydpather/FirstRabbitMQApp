@@ -17,6 +17,8 @@ RabbitMQ Management Console:
   * password: guest
 
 Known issue - all exchanges get deleted out of the blue
+  * hoping this is due to an issue with Comodo antivirus
   * to fix: 
     * run RabbitMQ command prompt as administrator (from start menu)
     * run this command: rabbitmqctl reset
+  * no idea how to prevent/detect this in prod
