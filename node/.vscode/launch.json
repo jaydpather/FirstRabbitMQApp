@@ -7,7 +7,7 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "NextJS",
+            "name": "Server",
             "runtimeExecutable": "node",
             "runtimeArgs": ["--inspect", "server/server.js"],
             "port": 9229,
@@ -18,17 +18,17 @@
             ]
         },
         {
-            "type": "chrome",
+            "type": "firefox",
             "request": "launch",
-            "name": "Chrome",
-            "url": "http://localhost:8080",
+            "name": "Client-Firefox",
+            "url": "http://localhost:3000",
             "webRoot": "${workspaceFolder}"
         }
     ],
     "compounds": [
         {
-            "name": "Server and Client w/ Chrome",
-            "configurations": ["NextJS", "Chrome"]
+            "name": "Server and Client-Firefox",
+            "configurations": ["Server", "Client-Firefox"]
         }
     ]
 }
