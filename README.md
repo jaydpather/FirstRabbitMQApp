@@ -3,13 +3,9 @@
 to run server: 
   * cd node
   * npm run dev
- 
-server depends on fable project:
-  * to compile:
-    * cd fable
-	* cd cd server
-	* npm run-script build
-	  * see webpack.config to find target JS file
+
+
+RABBIT MQ
 
 server requires RabbitMQ to be running:
     * to start RabbitMQ: 
@@ -17,5 +13,10 @@ server requires RabbitMQ to be running:
 
 RabbitMQ Management Console:
   * http://localhost:15672/
-  * admin
-  * rabbitmq
+  * username: guest
+  * password: guest
+
+Known issue - all exchanges get deleted out of the blue
+  * to fix: 
+    * run RabbitMQ command prompt as administrator (from start menu)
+    * run this command: rabbitmqctl reset
